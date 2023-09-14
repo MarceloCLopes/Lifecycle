@@ -24,11 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        binding.tvCounter.text = viewModel.counter.toString()
+        viewModel.counter.observe(this) { counter ->
+            binding.tvCounter.text = counter.toString()
+        }
 
         binding.fab.setOnClickListener { view ->
             viewModel.increment()
-            binding.tvCounter.text = viewModel.counter.toString()
         }
     }
 

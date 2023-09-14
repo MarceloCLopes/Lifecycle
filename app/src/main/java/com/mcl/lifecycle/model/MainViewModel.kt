@@ -1,12 +1,15 @@
 package com.mcl.lifecycle.model
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel: ViewModel() {
-    var counter = 0
-        private set
+    private val _counter = MutableLiveData(0)
+    val counter: LiveData<Int> = _counter
 
     fun increment(){
-        counter++
+        val number = _counter.value ?: 0
+        _counter.value = number + 1
     }
 }
