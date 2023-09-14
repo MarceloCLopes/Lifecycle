@@ -1,4 +1,4 @@
-package com.mcl.lifecycle
+package com.mcl.lifecycle.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.mcl.lifecycle.R
 import com.mcl.lifecycle.databinding.FragmentFirstBinding
 
 /**
