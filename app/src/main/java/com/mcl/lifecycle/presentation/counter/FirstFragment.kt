@@ -1,39 +1,40 @@
-package com.mcl.lifecycle.fragments
+package com.mcl.lifecycle.presentation.counter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.mcl.lifecycle.R
 import com.mcl.lifecycle.databinding.FragmentFirstBinding
+import com.mcl.lifecycle.presentation.ViewModelFactory
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel by activityViewModels<MainViewModel>{
+        ViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
+            val incrementBy = binding.etIncrementBy.text.toString()
+            viewModel.incrementBy = incrementBy.toIntOrNull() ?: 1
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
